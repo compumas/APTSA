@@ -24,7 +24,8 @@ if($_POST){
   $sentencia->bindParam(":nombredelpuesto",$nombredelpuesto);
   $sentencia->bindParam(":id",$txtID);
   $sentencia->execute();
-  header("location:index.php");
+  $mensaje="Registro Actualizado...";
+  header("location:index.php?mensaje=".$mensaje);
 }
 
 ?>

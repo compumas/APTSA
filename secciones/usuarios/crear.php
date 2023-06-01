@@ -1,3 +1,30 @@
+<?php 
+include("../../bd.php");
+
+if($_POST){
+ // print_r($_POST);
+   //Recolectamos los datos del metodo POST
+  $usuario=(isset($_POST["usuario"]) ?$_POST["usuario"]:"");
+  $password=(isset($_POST["password"]) ?$_POST["password"]:"");
+  $correo=(isset($_POST["correo"]) ?$_POST["correo"]:"");
+
+  //Preparamos la insercción
+  $sentencia=$conexion->prepare("INSERT INTO tbl_usuarios (id,usuario,password,correo)
+      VALUES (NULL,:usuario,:password,:correo)");
+
+  //Asignando los valores que vienen del metodo POST
+  $sentencia->bindParam(":usuario",$usuario);
+  $sentencia->bindParam(":password",$password);
+  $sentencia->bindParam(":correo",$correo);
+
+  $sentencia->execute();
+  $mensaje="Registro Agregado...";
+  header("location:index.php?mensaje=".$mensaje);
+
+}
+
+?>
+
 <?php include("../../Templates/header.php");   ?>
 
 <br>

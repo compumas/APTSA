@@ -7,7 +7,8 @@ if(isset($_GET['txtID'])){
   $sentencia=$conexion->prepare("DELETE FROM tbl_puestos WHERE id=:id");
   $sentencia->bindParam(":id",$txtID);
   $sentencia->execute();
-  header("location:index.php");
+  $mensaje="Registro Eliminado...";
+  header("location:index.php?mensaje=".$mensaje);
 }
 
 //SECCION DE LISTAR
@@ -27,7 +28,7 @@ $lista_tbl_puestos=$sentencia->fetchAll(PDO::FETCH_ASSOC);
   <div class="card-body">
 
     <div class="table-responsive-sm">
-      <table class="table">
+      <table class="table" id="tabla_id">
         <thead>
           <tr>
             <th scope="col">Id</th>
@@ -45,7 +46,7 @@ $lista_tbl_puestos=$sentencia->fetchAll(PDO::FETCH_ASSOC);
             <td>
                 <a class="btn btn-info" href="editar.php?txtID=<?php echo $registro['id']?>" role="button">Editar</a>
                 |
-                <a class="btn btn-danger" href="index.php?txtID=<?php echo $registro['id'];?>" role="button">Eliminar</a>
+                <a class="btn btn-danger" href="javascript:borrar(<?php echo $registro['id'];?>)" role="button">Eliminar</a>
             </td>
           </tr>
 
